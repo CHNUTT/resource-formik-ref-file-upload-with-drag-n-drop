@@ -16,16 +16,17 @@ const MultipleFileUploadField = () => {
 	}, []);
 	const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-	return;
-	<>
-		<div {...getRootProps()}>
-			<input {...getInputProps()} />
-			<p>Drag 'n' Drop some files here, or click to select files</p>
-		</div>
-		{/* {files.map((fileWrapper) => (
-			<SingleFileUploadWithProgress file={fileWrapper.file} />
-		))} */}
-	</>;
+	return (
+		<>
+			<div {...getRootProps()}>
+				<input {...getInputProps()} />
+				<p>Drag 'n' Drop some files here, or click to select files</p>
+			</div>
+			{files.map((fileWrapper, index) => (
+				<SingleFileUploadWithProgress key={index} file={fileWrapper.file} />
+			))}
+		</>
+	);
 };
 
 export default MultipleFileUploadField;
