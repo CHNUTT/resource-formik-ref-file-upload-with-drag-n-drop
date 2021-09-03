@@ -7,11 +7,11 @@ export default function Home() {
 	return (
 		<Card>
 			<CardContent>
-				<Formik initialValues={{}} onSubmit={() => {}}>
+				<Formik initialValues={{ files: [] }} onSubmit={() => {}}>
 					{({ values, errors }) => (
 						<Form>
 							<Grid container spacing={2} direction='column'>
-								<MultipleFileUploadField />
+								<MultipleFileUploadField name='files' />
 							</Grid>
 							<pre>{JSON.stringify({ values, errors }, null, 4)}</pre>
 						</Form>
