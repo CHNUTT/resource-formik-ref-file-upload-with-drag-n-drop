@@ -1,3 +1,4 @@
+import { Grid, LinearProgress } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 
 interface ISingleFileUploadWithProgressProps {
@@ -45,7 +46,11 @@ const SingleFileUploadWithProgress = ({
 		upload();
 	}, []);
 
-	return <div>SFU - {progress}</div>;
+	return (
+		<Grid item>
+			<LinearProgress variant='determinate' value={progress} />
+		</Grid>
+	);
 };
 
 export default SingleFileUploadWithProgress;

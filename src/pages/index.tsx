@@ -10,7 +10,9 @@ export default function Home() {
 				<Formik initialValues={{}} onSubmit={() => {}}>
 					{({ values, errors }) => (
 						<Form>
-							<MultipleFileUploadField />
+							<Grid container spacing={2} direction='column'>
+								<MultipleFileUploadField />
+							</Grid>
 							<pre>{JSON.stringify({ values, errors }, null, 4)}</pre>
 						</Form>
 					)}
