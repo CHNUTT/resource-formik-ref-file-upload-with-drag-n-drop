@@ -57,7 +57,7 @@ const MultipleFileUploadField = ({ name }: { name: string }) => {
 			</Grid>
 
 			{files.map((fileWrapper, idx) => (
-				<Grid item>
+				<Grid item key={idx}>
 					{fileWrapper.errors.length ? (
 						<UploadError
 							file={fileWrapper.file}
@@ -66,7 +66,6 @@ const MultipleFileUploadField = ({ name }: { name: string }) => {
 						/>
 					) : (
 						<SingleFileUploadWithProgress
-							key={idx}
 							file={fileWrapper.file}
 							onDelete={onDelete}
 							onUpload={onUpload}

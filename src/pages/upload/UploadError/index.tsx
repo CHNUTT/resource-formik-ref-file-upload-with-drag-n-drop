@@ -24,8 +24,10 @@ const UploadError = ({ file, onDelete, errors }: UploadErrorProps) => {
 		<>
 			<FileHeader file={file} onDelete={onDelete} />
 			<ErrorLinearProgress variant='determinate' value={100} />
-			{errors.map((error) => (
-				<Typography color='error'>{error.message}</Typography>
+			{errors.map((error, idx) => (
+				<Typography key={idx} color='error'>
+					{error.message}
+				</Typography>
 			))}
 		</>
 	);
