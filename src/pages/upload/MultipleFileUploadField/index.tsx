@@ -3,6 +3,7 @@ import { useField } from 'formik';
 import { useCallback, useEffect, useState } from 'react';
 import { FileError, FileRejection, useDropzone } from 'react-dropzone';
 import SingleFileUploadWithProgress from '../SingleFileUploadWithProgress';
+import UploadError from '../UploadError';
 
 export interface UploadableFile {
 	file: File;
@@ -25,7 +26,11 @@ const MultipleFileUploadField = ({ name }: { name: string }) => {
 		helpers.setTouched(true);
 	}, [files]);
 
-	const { getRootProps, getInputProps } = useDropzone({ onDrop });
+	const { getRootProps, getInputProps } = useDropzone({
+		onDrop,
+		accept: 'image/png',
+		maxSize: 300 * 1024, // 300 kb
+	});
 
 	const onDelete = (file: File) => {
 		setFiles((curr) => curr.filter((fw) => fw.file !== file));
@@ -51,15 +56,23 @@ const MultipleFileUploadField = ({ name }: { name: string }) => {
 				</div>
 			</Grid>
 
-			<pre>{JSON.stringify(files, null, 4)}</pre>
-
-			{files.map((fileWrapper, index) => (
-				<SingleFileUploadWithProgress
-					key={index}
-					file={fileWrapper.file}
-					onDelete={onDelete}
-					onUpload={onUpload}
-				/>
+			{files.map((fileWrapper, idx) => (
+				<Grid item>
+					{fileWrapper.errors.length ? (
+						<UploadError
+							file={fileWrapper.file}
+							onDelete={onDelete}
+							errors={fileWrapper.errors}
+						/>
+					) : (
+						<SingleFileUploadWithProgress
+							key={idx}
+							file={fileWrapper.file}
+							onDelete={onDelete}
+							onUpload={onUpload}
+						/>
+					)}
+				</Grid>
 			))}
 		</>
 	);
